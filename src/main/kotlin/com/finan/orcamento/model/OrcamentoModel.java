@@ -27,8 +27,25 @@ public class OrcamentoModel implements Serializable {
     @Column(name="valor_orcamento")
     private BigDecimal valorOrcamento;
 
+    @Column(name="desconto_orcamento")
+    private BigDecimal descontoOrcamento;
+
+    @NotNull
+    @Column(name="QtdItens")
+    private BigDecimal qtdItens;
+
+
     @Column(name="valor_icms")
     private BigDecimal valorICMS;
+
+    @Column(name="Final")
+    private BigDecimal calculofinal;
+
+    public BigDecimal getCalculofinal() {
+       calculofinal = (valorOrcamento.multiply(qtdItens)).subtract(descontoOrcamento);
+        return calculofinal;
+    }
+
 
     @ManyToOne
     @JoinColumn(name="usuario_id", referencedColumnName = "id")
@@ -39,3 +56,4 @@ public class OrcamentoModel implements Serializable {
     }
 
 }
+
